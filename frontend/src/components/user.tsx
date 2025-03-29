@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { register } from '../api/auth'
+import { useNavigate } from 'react-router-dom'
 
 const user = () => {
     const [name,setName] = useState('')
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
+    const navigate = useNavigate()
     const handleRegister = async(e)=>{
         console.log('halo')
         e.preventDefault()
@@ -13,6 +15,7 @@ const user = () => {
             const response = await register({name,email,password}) 
         if(response.success){
             alert(response.message)
+            navigate('/dashboard')
         }else{
             console.log(response.error)
         }
